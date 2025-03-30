@@ -1,0 +1,45 @@
+#!/bin/bash
+
+
+if [ ! -f "./hyper_MD.tpr" ]; then 
+	echo "The .tpr file of the production run does not exist yet, so I will not do the equilibration and just resume from the most recent checkpoint-file!"
+	gmx grompp -f hyper_EM.mdp -p hyper_1.top -o hyper_EM.tpr -c hyper.pdb -n hyper.ndx -maxwarn 4
+	srun gmx_mpi mdrun -s hyper_EM.tpr -o hyper_EM.trr -c hyper_EM.pdb -g EM.log -e EM.edr -v -tableb table_a*.xvg table_d*.xvg
+
+	gmx grompp -f hyper_1.mdp -p hyper_1.top -o hyper_1.tpr -c hyper_EM.pdb -n hyper.ndx -maxwarn 4
+	srun gmx_mpi mdrun -s hyper_1.tpr -o hyper_1.trr -c hyper_1.pdb -g hyper_1.log -e hyper_1.edr -tableb table_a*.xvg table_d*.xvg
+
+	#equilibrate after run 1
+	gmx grompp -f hyper_EM.mdp -p hyper_2.top -o hyper_EM1.tpr -c hyper_1.pdb -n hyper.ndx -maxwarn 4
+	srun gmx_mpi mdrun -s hyper_EM1.tpr -o hyper_EM.trr -c hyper_1_EM.pdb -g EM.log -e EM.edr -v -tableb table_a*.xvg table_d*.xvg
+
+	#run2
+	gmx grompp -f hyper_2.mdp -p hyper_2.top -o hyper_2.tpr -c hyper_1_EM.pdb -n hyper.ndx -maxwarn 4
+	srun gmx_mpi mdrun -s hyper_2.tpr -o hyper_2.trr -c hyper_2.pdb -g hyper_2.log -e hyper_2.edr -v -tableb table_a*.xvg table_d*.xvg
+
+	#equilibrate after run 2
+	gmx grompp -f hyper_EM.mdp -p hyper_3.top -o hyper_EM2.tpr -c hyper_2.pdb -n hyper.ndx -maxwarn 4
+	srun gmx_mpi mdrun -s hyper_EM2.tpr -o hyper_EM.trr -c hyper_2_EM.pdb -g EM.log -e EM.edr -v -tableb table_a*.xvg table_d*.xvg
+
+	#run3
+	gmx grompp -f hyper_3.mdp -p hyper_3.top -o hyper_3.tpr -c hyper_2_EM.pdb -n hyper.ndx -maxwarn 4
+	srun gmx_mpi mdrun -s hyper_3.tpr -o hyper_3.trr -c hyper_3.pdb -g hyper_3.log -e hyper_3.edr -v -tableb table_a*.xvg table_d*.xvg
+
+	#equilibrate after run 3
+	gmx grompp -f hyper_EM.mdp -p hyper.top -o hyper_EM3.tpr -c hyper_3.pdb -n hyper.ndx -maxwarn 4
+	srun gmx_mpi mdrun -s hyper_EM3.tpr -o hyper_EM.trr -c hyper_3_EM.pdb -g EM.log -e EM.edr -v -tableb table_a*.xvg table_d*.xvg
+
+
+	gmx grompp -f hyper_MD_EQ.mdp -p hyper.top -o hyper_MD_EQ.tpr -c hyper_3_EM.pdb -n hyper.ndx -maxwarn 4
+	srun gmx_mpi mdrun -s hyper_MD_EQ.tpr -o hyper_MD_EQ.trr -c hyper_MD_EQ.pdb -g MD_EQ.log -e md_eq.edr -v -tableb table_a*.xvg table_d*.xvg
+
+	gmx grompp -f hyper_EM.mdp -p hyper.top -o hyper_EM4.tpr -c hyper_MD_EQ.pdb -n hyper.ndx -maxwarn 4
+	srun gmx_mpi mdrun -s hyper_EM4.tpr -o hyper_EM.trr -c hyper_4_EM.pdb -g EM.log -e EM.edr -v -tableb table_a*.xvg table_d*.xvg
+        rm state.cpt state_prev.cpt
+	#PRODUCTION RUN
+	gmx grompp -f hyper_MD.mdp -p hyper.top -o hyper_MD.tpr -c hyper_4_EM.pdb -n hyper.ndx -maxwarn 4
+fi
+
+srun gmx_mpi mdrun -s hyper_MD.tpr -o hyper_MD.trr -c hyper_MD.pdb -g MD.log -e md.edr -v -tableb table_a*.xvg table_d*.xvg #-cpi state.cpt #add this one back when extending the simulation!
+
+ 
