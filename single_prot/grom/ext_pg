@@ -1,0 +1,15 @@
+#!/bin/bash
+#SBATCH --time=00-12:00:00
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=8
+#SBATCH --job-name=test
+#SBATCH --partition=vulture
+
+ulimit -s unlimited
+
+module load GROMACS/2016.1-foss-2016a-CUDA-7.5.18-avx2-hybrid
+
+
+srun gmx_mpi mdrun -s MD_chain.tpr -o MD_chain.trr -c MD_chain.pdb -g MD_chain.log -e MD_chain.edr -v -tableb table_{a1,a2,a12,a22,a10,a3,a11,a32,a3,d10,d11,d12,d13,d21,d22,d23,d31,d32,d33}.xvg -cpi state.cpt -append
+
+

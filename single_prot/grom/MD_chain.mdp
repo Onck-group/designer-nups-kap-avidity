@@ -1,0 +1,64 @@
+; VARIOUS PREPROCESSING OPTIONS
+title               = Testmol
+cpp                 = /usr/bin/cpp
+;constraints         = all-bonds
+
+
+; RUN CONTROL PARAMETERS
+integrator          = sd
+dt                  = 0.02 ; ps.
+nsteps              = 75000001; total 1500 ns.
+comm_mode = none
+nstcomm             = 1
+
+; OUTPUT CONTROL OPTIONS
+; Output frequency for coords (x), velocities (v) and forces (f)
+nstxout             = 2501     ; collect data every 50 ps.
+nstvout             = 0
+nstfout             = 0
+
+; NEIGHBORSEARCHING PARAMETERS
+cutoff-scheme = group
+; nblist update frequency
+nstlist             = 15
+; ns algorithm (simple or grid)
+ns_type             = grid
+; Periodic boundary conditions: xyz (default), no (vacuum)
+; or full (infinite systems only)
+pbc		    = xyz
+; nblist cut-off 
+rlist               = 5
+
+
+; LANGEVIN DYNAMICS OPTIONS
+; Friction coefficient (amu/ps) and random seed, If zero =amu/tau_t
+ld-seed                  = -1
+
+
+; OPTIONS FOR ELECTROSTATICS AND VDW
+;cutoff-scheme = group
+; Method for doing electrostatics
+coulombtype         = User
+rcoulomb            = 5
+; Relative dielectric constant for the medium and the reaction field
+epsilon_r	    = 80
+; Method for doing Van der Waals
+vdw-type            = User
+; cut-off lengths       
+rvdw                = 2.5
+
+
+; OPTIONS FOR WEAK COUPLING ALGORITHMS
+; Temperature coupling  
+Tcoupl                = nose-hoover
+; Groups to couple separately
+
+tc-grps               = SYSTEM
+tau_t                 = 10  
+ref_t                 = 300    
+
+
+; GENERATE VELOCITIES FOR STARTUP RUN
+gen_vel             = yes
+gen_temp            = 300.0
+gen_seed            = -1

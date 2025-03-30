@@ -1,0 +1,10 @@
+#!/bin/bash
+
+
+echo 0 | gmx trjconv -f MD_chain.trr -s MD_chain.tpr -pbc nojump -o hydro.xtc
+
+echo 0 | gmx traj -s MD_chain.tpr -n chain.ndx -f hydro.xtc -oxt MD_chain_hydro.pdb -b 500000
+
+rm hydro.xtc
+
+./runhydro.py

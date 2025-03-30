@@ -1,0 +1,22 @@
+#!/bin/bash
+#SBATCH --time=02-00:00:00
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --job-name=test
+#SBATCH --mail-type=ALL
+#SBATCH --partition=shortq
+
+ulimit -s unlimited
+
+module load gromacs/2016.5-gcc-openmpi
+module load python/python-2.7.13
+
+gmx grompp -f EM_chain.mdp -o EM_chain.tpr -c chain_org2.pdb -p chain.top -n chain.ndx -maxwarn 4
+mpirun gmx_mpi mdrun -s EM_chain.tpr -o EM_chain.trr -c EM_chain.pdb -g EM_chain.log -e EM_chain.edr -v -tableb table_{a1,a2,a12,a22,a10,a3,a11,a32,a3,d10,d11,d12,d13,d21,d22,d23,d31,d32,d33}.xvg -maxh 0.5
+
+gmx grompp -f EQ_chain.mdp -o EQ_chain.tpr -c EM_chain.pdb -p chain.top -n chain.ndx -maxwarn 4
+mpirun gmx_mpi mdrun -s EQ_chain.tpr -o EQ_chain.trr -c EQ_chain.pdb -g EQ_chain.log -e EQ_chain.edr -v -tableb table_{a1,a2,a12,a22,a10,a3,a11,a32,a3,d10,d11,d12,d13,d21,d22,d23,d31,d32,d33}.xvg
+
+gmx grompp -f MD_chain.mdp -o MD_chain.tpr -c EQ_chain.pdb -p chain.top -n chain.ndx -maxwarn 4
+mpirun gmx_mpi mdrun -s MD_chain.tpr -o MD_chain.trr -c MD_chain.pdb -g MD_chain.log -e MD_chain.edr -v -tableb table_{a1,a2,a12,a22,a10,a3,a11,a32,a3,d10,d11,d12,d13,d21,d22,d23,d31,d32,d33}.xvg
+
