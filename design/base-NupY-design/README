@@ -1,0 +1,13 @@
+2019-10-18 HWV
+
+In this folder, the code is developed for designing multiple NupY designs.
+
+These designs are created using the average composition of GLFG-Nups, considering the collapsed and extended domain. Original FG repeats or GLFG repeats are excluded.
+
+The code accounts for the native FG:GLFG density.
+
+As an update to the code, we also included checks for accidental FGs.
+We created 10 different designs (disordered acc. to PONDR), which are then further optimized using DISOPRED.
+
+Then, the genes are determined.
+

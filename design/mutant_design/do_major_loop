@@ -1,0 +1,6 @@
+#!/bin/bash
+
+
+for ch in 0.0239 0.0956 0.2868 0.3824 0.478 0.5736 ; do
+	sh do_analysis.sh $ch
+done
