@@ -1,0 +1,20 @@
+[ defaults ]
+; nbfunc  comb-rule  gen-pairs	 fudgeLJ  fudgeQQ
+ 1              1           no          1.0         1.0
+#include "FF_unfolded.itp"
+#include "FF_folded.itp"
+#include "FF_bsites.itp"
+#include "FF_catpi.itp"
+#include "FF_crossterms.itp"
+#include "FF_crossterms_BS.itp"
+#include "FF_BSFG.itp"
+#include "yFGKap-A.itp"
+#include "yFGKap-B.itp"
+[ system ]
+; Name
+yFGKap-complex 
+
+[ molecules ]
+; Compound	#mols
+yFGKap-A 1
+yFGKap-B 1

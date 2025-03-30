@@ -1,0 +1,15 @@
+
+
+
+for simulation_dirs in all NupY_values, do:
+
+	cd dir
+	make 20 subdirs
+	prep 20 copies
+	copy over job submission scripts, rename to current dir
+	source a specific python environment
+	cd to all 20 dirs, generate different starting structures (reqs mda)
+	go back
+
+done
+

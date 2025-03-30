@@ -1,0 +1,18 @@
+#!/bin/bash
+#SBATCH --time=00-12:00:00
+#SBATCH --ntasks=12
+#SBATCH --job-name=fXX.XX
+#SBATCH --partition=regular
+
+
+input_structure=$1
+
+module load GROMACS/2018.4-foss-2018a
+
+sbatch --dependency=afterany:${SLURM_JOBID} ext_PG2 $1
+sleep 120
+
+
+srun gmx_mpi mdrun -s MD.tpr -o MD.trr -c MD_$input_structure -g MD.log -e MD.edr -tableb table_a*.xvg table_d*.xvg -dlb yes -cpi state.cpt 
+
+

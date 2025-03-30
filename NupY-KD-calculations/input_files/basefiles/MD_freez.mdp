@@ -1,0 +1,63 @@
+﻿; RUN CONTROL PARAMETERS
+integrator          = sd
+dt                  = .02 ; ps !
+nsteps              =  1000000000 ; total 10000 ns.
+comm_mode = none
+
+; OUTPUT CONTROL OPTIONS
+; Output frequency for coords (x), velocities (v) and forces (f)
+nstxtcout	    = 10000     ; every 200 ps
+nstxout	            = 0
+nstvout             = 0
+nstfout             = 0
+nstlog		    = 10000
+nstenergy           = 10000
+; NEIGHBORSEARCHING PARAMETERS
+nstlist             = 20
+ns_type             = grid
+pbc		    = xyz
+rlist               = 5
+nstcalcenergy       = 2500
+
+ld-seed                  = -1
+
+cutoff-scheme=group
+coulombtype         = User
+rcoulomb            = 5
+epsilon_r	    = 80
+vdw-type            = User   
+rvdw                = 2.5
+
+
+energygrps = AA RK FYW BRK BFYW F1 G1
+energygrp_table = RK FYW RK BFYW RK F1 FYW BRK BRK BFYW
+
+
+;INTERACTION table (should give 5 pairs, count non-1b pairs)
+;       F1   FYW   BFYW   RK   BRK   AA
+;F1     1b    1b    1b*   CP   1b*   1b
+;FYW    1b    1b    1b    CP   CP    1b
+;BFYW   1b*   1b    1b    CP   CP    1b
+;RK     CP    CP    CP    1b   1b    1b
+;BRK    1b*   CP    CP    1b   1b    1b
+;AA     1b    1b    1b    1b   1b    1b
+; CP = cat-pi, 1b = 1bpa, 1b* = 1bpa with different parameters (varied)
+
+
+
+
+
+tc-grps               = SYSTEM
+tau_t                 = 50
+ref_t                 = 300
+
+
+
+; GENERATE VELOCITIES FOR STARTUP RUN
+gen_vel             = yes
+gen_temp            = 300.0
+gen_seed            = -1
+
+freezegrps   = FREEZ
+freezedim    = Y Y Y
+

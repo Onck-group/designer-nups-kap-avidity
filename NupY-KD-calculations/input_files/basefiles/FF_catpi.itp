@@ -1,0 +1,94 @@
+[ nonbond_params ]
+; i     j   func        C            A
+
+; folded-folded interactions between FYW/RK
+RR       FF       1       4.300000E+00    4.300000E+00
+RR       WW       1       6.700000E+00    6.700000E+00
+RR       YY       1       5.000000E+00    5.000000E+00
+
+KK       FF       1       1.790000E+00    1.790000E+00
+KK       WW       1       4.260000E+00    4.260000E+00
+KK       YY       1       3.130000E+00    3.130000E+00
+
+; folded-unfolded interactions between FFYYWW/RK and RRKK/FYW and F1!
+R       FF       1       4.300000E+00    4.300000E+00
+R       WW       1       6.700000E+00    6.700000E+00
+R       YY       1       5.000000E+00    5.000000E+00
+
+K       FF       1       1.790000E+00    1.790000E+00
+K       WW       1       4.260000E+00    4.260000E+00
+K       YY       1       3.130000E+00    3.130000E+00
+
+RR       F       1       4.300000E+00    4.300000E+00
+RR       W       1       6.700000E+00    6.700000E+00
+RR       Y       1       5.000000E+00    5.000000E+00
+RR       F1      1       4.300000E+00    4.300000E+00
+
+KK       F       1       1.790000E+00    1.790000E+00
+KK       W       1       4.260000E+00    4.260000E+00
+KK       Y       1       3.130000E+00    3.130000E+00
+KK       F1      1       1.790000E+00    1.179000E+00
+
+; unfolded-unfolded interactions between F/F1YW/RK
+
+
+R       F       1       4.300000E+00    4.300000E+00
+R       W       1       6.700000E+00    6.700000E+00
+R       Y       1       5.000000E+00    5.000000E+00
+R       F1      1       4.300000E+00    4.300000E+00
+
+K       F       1       1.790000E+00    1.790000E+00
+K       W       1       4.260000E+00    4.260000E+00
+K       Y       1       3.130000E+00    3.130000E+00
+K       F1      1       1.790000E+00    1.790000E+00
+
+; unfolded-folded interactions between NTR binding sites and
+; FG-Nup residues. Note that these encompass the following:
+; BR or BK  to FYW and BY or BF or BW to KR.
+; F1 is not included, since these interact specifically.
+
+BR 	 F 	 1 	 4.300000E+00 	 4.300000E+00 
+BK 	 F 	 1 	 1.790000E+00 	 1.790000E+00 
+
+BR 	 Y 	 1 	 5.000000E+00 	 5.000000E+00 
+BK 	 Y 	 1 	 3.130000E+00 	 3.130000E+00 
+
+BR 	 W 	 1 	 6.700000E+00 	 6.700000E+00 
+BK 	 W 	 1 	 4.260000E+00 	 4.260000E+00 
+
+BF 	 R 	 1 	 4.300000E+00 	 4.300000E+00 
+BW 	 R 	 1 	 6.700000E+00 	 6.700000E+00 
+BY 	 R 	 1 	 5.000000E+00 	 5.000000E+00 
+
+BF 	 K 	 1 	 1.790000E+00 	 1.790000E+00 
+BW 	 K 	 1 	 4.260000E+00 	 4.260000E+00 
+BY 	 K 	 1 	 3.130000E+00 	 3.130000E+00 
+
+; BS and folded protein CP residuess
+BR 	 FF 	 1 	 4.300000E+00 	 4.300000E+00 
+BK 	 FF 	 1 	 1.790000E+00 	 1.790000E+00 
+
+BR 	 YY 	 1 	 5.000000E+00 	 5.000000E+00 
+BK 	 YY 	 1 	 3.130000E+00 	 3.130000E+00 
+
+BR 	 WW 	 1 	 6.700000E+00 	 6.700000E+00 
+BK 	 WW 	 1 	 4.260000E+00 	 4.260000E+00 
+
+BF 	 RR 	 1 	 4.300000E+00 	 4.300000E+00 
+BW 	 RR 	 1 	 6.700000E+00 	 6.700000E+00 
+BY 	 RR 	 1 	 5.000000E+00 	 5.000000E+00 
+
+BF 	 KK 	 1 	 1.790000E+00 	 1.790000E+00 
+BW 	 KK 	 1 	 4.260000E+00 	 4.260000E+00 
+BY 	 KK 	 1 	 3.130000E+00 	 3.130000E+00 
+
+; BS and BS (only need 6 terms dt symmetry)
+BR 	 BF 	 1 	 4.300000E+00 	 4.300000E+00 
+BK 	 BF 	 1 	 1.790000E+00 	 1.790000E+00 
+
+BR 	 BY 	 1 	 5.000000E+00 	 5.000000E+00 
+BK 	 BY 	 1 	 3.130000E+00 	 3.130000E+00 
+
+BR 	 BW 	 1 	 6.700000E+00 	 6.700000E+00 
+BK 	 BW 	 1 	 4.260000E+00 	 4.260000E+00 
+
