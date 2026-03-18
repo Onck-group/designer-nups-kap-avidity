@@ -1,4 +1,6 @@
-This directory contains sequences and .pdb files for the NupY-study.
+This respository contains an old method of generating the `.pdb`-files for the single NupY-proteins (extracted from a nanopore environment). It is not used actively / necessary for reproducing the results of this study.
+
+
 
 Some notes:
 -A preceding GP-peptide is added to the sequence, and an additional Cys-residue is added to the end
