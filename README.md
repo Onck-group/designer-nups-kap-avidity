@@ -1,5 +1,7 @@
 # designer-nups-kap-avidity
-Simulation files for the paper "Spatial control of karyopherin binding avidity within NPC mimics revealed by designer FG-Nucleoporins"
+Simulation files for the paper:
+**Spatial control of karyopherin binding avidity within NPC mimics revealed by designer FG-Nucleoporins** by
+_Hendrik W. de Vries, Anders Barth, Alessio Fragasso, Tegan A. Otto, Ashmiani van den Berg, Eli O. van der Sluis, Erik van der Giessen, Liesbeth M. Veenhoff, Cees Dekker and Patrick R. Onck_.
 
 Files are present for:
 - Design approach
@@ -15,4 +17,6 @@ Virtually all analyses or setups make use of the following softwares:
 - MATLAB R2018b or later
 
 Specific usage instructions for the various scripts, analyses and simulation setups can be found in README files or script preambles throughout the individual sub-directories.
+
+The code is available under an AGPL 3.0 license.
 
